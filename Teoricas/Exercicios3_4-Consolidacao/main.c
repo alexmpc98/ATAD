@@ -86,7 +86,7 @@ BEGIN
         PRINT "1. String sem caracteres repetidos: $str"
 END
 
-ALGORITHM TIME COMPLEXITY: LINEAR / 0(n) 
+ALGORITHM TIME COMPLEXITY: CUBIC / 0(n³) 
 
 */
 
