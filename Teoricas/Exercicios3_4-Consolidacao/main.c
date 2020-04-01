@@ -76,9 +76,9 @@ BEGIN
     str <- toUpperCase(str)
     size <- length(str)
         FOR index1 <- 0 TO (index1<size) DO
-            FOR index2 <- index1 + 1 TO (str[index2] != '\0') DO
+            FOR index2 <- index1 + 1 TO (str[index2]  ≠ '\0') DO
                 IF(str[index2] == str[index1]) THEN
-                    FOR index3 <- index2 TO (str[index3]!= '\0') DO
+                    FOR index3 <- index2 TO (str[index3]  ≠ '\0') DO
                         str[index3] <- str[index3+1]
                     END FOR
             END FOR
@@ -118,7 +118,7 @@ void removeCharacters(char *str){
 BEGIN
     j <- length(name)
     index <- j-1
-    WHILE (name[index] != ' ') DO
+    WHILE (name[index] ≠ ' ') DO
         index <- index - 1
     END WHILE
     WHILE (index < j) DO
@@ -127,7 +127,7 @@ BEGIN
     END WHILE
         PRINT ", "
         index <- 0
-    WHILE (name[index] != ' ')
+    WHILE (name[index] ≠ ' ')
         index <- index + 1
         PRINT "$name[index]"
     END WHILE
