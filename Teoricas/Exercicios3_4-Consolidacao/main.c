@@ -53,7 +53,7 @@ i <- 0
     END WHILE
 END
 
-ALGORITHM TIME COMPLEXITY: LINEAR / 0(n) 
+ALGORITHM TIME COMPLEXITY: LINEAR / O(n) 
 */
 
 void toUpperCase(char *str){
@@ -86,7 +86,7 @@ BEGIN
         PRINT "1. String sem caracteres repetidos: $str"
 END
 
-ALGORITHM TIME COMPLEXITY: CUBIC / 0(n³) 
+ALGORITHM TIME COMPLEXITY: CUBIC / O(n³) 
 
 */
 
@@ -133,7 +133,7 @@ BEGIN
     END WHILE
 END
 
-ALGORITHM TIME COMPLEXITY: LINEAR / 0(n) 
+ALGORITHM TIME COMPLEXITY: LINEAR / O(n) 
 */
 
 void namePresentation(char *name){
@@ -175,7 +175,7 @@ BEGIN
    PRINT "New String: $string"
 END
 
-ALGORITHM TIME COMPLEXITY: LINEAR / 0(n) 
+ALGORITHM TIME COMPLEXITY: LINEAR / O(n) 
 */
 
 void changeCharacters(char *string, char CharToChange, char NewChar){
@@ -202,7 +202,7 @@ BEGIN
     END FOR
 END
 
-ALGORITHM TIME COMPLEXITY: LINEAR / 0(n)
+ALGORITHM TIME COMPLEXITY: LINEAR / O(n)
 */
 
 void greaterValues(int *array, int length, int value){
@@ -235,7 +235,7 @@ BEGIN
     PRINT "Lower Value: $lowerValue"
 END
 
-ALGORITHM TIME COMPLEXITY: QUADRATIC / 0(n²)
+ALGORITHM TIME COMPLEXITY: QUADRATIC / O(n²)
 */
 
 void lowerValue(int rows, int columns,int matrix[rows][columns]){
@@ -270,7 +270,7 @@ BEGIN
     PRINT "Sum of all the elements above the main diagonal: $sum"
 END
 
-ALGORITHM TIME COMPLEXITY: QUADRATIC / 0(n²)
+ALGORITHM TIME COMPLEXITY: QUADRATIC / O(n²)
 */
 
 void sumAboveMainDiagonal(int rows, int columns,int matrix[rows][columns]){
