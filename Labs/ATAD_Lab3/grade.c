@@ -15,17 +15,16 @@
 Grade gradeCreate(int number, char* name, float result){
     Student newStudent;
     Grade newGrade;
-    if(result >= 0 && result < 21){
-        newStudent.studentNumber = number;
-        newStudent.name = name;
+    if(result >= 0 && result < 21) {
+        newStudent = studentCreate(number, name);
+       /* newStudent.studentNumber = number;
+        newStudent.name = name;*/
         newGrade.student = newStudent;
         newGrade.result = result;
         return newGrade;
-    }
-    else{
+    } else {
         printf("Nota inserida não se encontra nos parametros necessários, será declarado 0\n");
-        newStudent.studentNumber = number;
-        newStudent.name = name;
+        newStudent = studentCreate(number, name);
         newGrade.student = newStudent;
         newGrade.result = 0;
         return newGrade;
@@ -38,14 +37,14 @@ Grade gradeCreate(int number, char* name, float result){
  * @param result Nota do Estudante
  * @return char 
  */
-char* Approvation(float result){
-    if(result >= 9.5){
+char* approvation(float result){
+    if(result >= 9.5) {
             return "Approved";
-    }
-    else{
+    } else {
             return "Reproved";
     }
 }
+
 /**
  * @brief Mostra ao utilizador a nota de um estudante
  * 
@@ -54,7 +53,7 @@ char* Approvation(float result){
 
 void gradePrint(Grade g){
     printf("Number: %d | Name: %s | Grade: %.2f | Status: %s \n\n",
-    g.student.studentNumber,g.student.name,g.result, Approvation(g.result));
+    g.student.studentNumber,g.student.name,g.result, approvation(g.result));
 }
 
 /**
@@ -64,9 +63,10 @@ void gradePrint(Grade g){
  * @param size Tamanho do Array
  */
 void gradeArrayPrint(Grade *gradeArr,int size){
+    printf("All class notes:\n");
     for(int i=0; i<size;i++){
         printf("Number: %d | Name: %s | Grade: %.2f | Status: %s \n",gradeArr[i].student.studentNumber,
-        gradeArr[i].student.name,gradeArr[i].result, Approvation(gradeArr[i].result));
+        gradeArr[i].student.name,gradeArr[i].result, approvation(gradeArr[i].result));
     }
 }
 
@@ -80,7 +80,7 @@ void gradeArrayPrint(Grade *gradeArr,int size){
 int getNumberApproved(Grade *GradeArr,int size){
     int count = 0;
     for(int i=0; i<size; i++){
-        if(Approvation(GradeArr[i].result) == "Approved"){
+        if(approvation(GradeArr[i].result) == "Approved"){
             count++;
         }
     }
@@ -163,8 +163,8 @@ int getMinorGrade(Grade *gradeArr,int size){
 void gradeArrayStats(Grade *gradeArr,int size){
     gradeArrayPrint(gradeArr,size);
 
-    int Approved = getNumberApproved(gradeArr,size);
-    printf("Total of Approved: %d in %d\n", Approved,size);
+    int approved = getNumberApproved(gradeArr,size);
+    printf("Total of Approved: %d in %d\n", approved,size);
 
     int majorGrade = getMajorGrade(gradeArr,size);
     printf("The best great is %.2f values from %s\n",
@@ -202,13 +202,13 @@ void gradeArrSortByResult(Grade *gradeArr,int size){
  * @param size Tamanho do Array
  */
 void gradeArrSortByNumber(Grade *gradeArr,int size){
-    int newNumber = 0;
+    Grade newGrade;
     for(int i=0;i<size;i++){
         for(int a=0; a < size - i - 1; a++){
             if(gradeArr[a].student.studentNumber > gradeArr[a+1].student.studentNumber){
-                newNumber = gradeArr[a].student.studentNumber;
-                gradeArr[a].student.studentNumber = gradeArr[a+1].student.studentNumber;
-                gradeArr[a+1].student.studentNumber = newNumber;
+                newGrade = gradeArr[a];
+                gradeArr[a] = gradeArr[a+1];
+                gradeArr[a+1] = newGrade;
             }
         }
     }

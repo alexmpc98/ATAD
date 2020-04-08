@@ -3,4 +3,4 @@ typedef struct {
      char* name;
 } Student;
 
-Student studentCreate(int number,char* name);
+Student studentCreate(int number, char* name);

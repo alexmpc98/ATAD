@@ -6,7 +6,7 @@ typedef struct {
 } Grade;
 
 Grade gradeCreate(int number, char* name, float result);
-char* Approvation(float result);
+char* approvation(float result);
 void gradePrint(Grade g);
 void gradeArrayPrint(Grade *gradeArr,int size);
 int getNumberApproved(Grade *GradeArr,int size);
