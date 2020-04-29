@@ -16,10 +16,9 @@ scanf("%d",&n);
 array = fibArrayCreate(n);
 printf("Address of fib array: %p\n",&array);
 fibArrayPrint(array,n);
-fibArrayDestroy(&array);
+fibArrayDestroy(array);
 fibArrayPrint(array,n);
 printf("\nAddress of fib array: %p\n",&array);
-
 }
 
 
@@ -79,7 +78,14 @@ void fibArrayPrint(int *arr,int size){
     printf("%d}\n",arr[size-1]);
 }
 
+/**
+ * @brief Algoritmo que serve para por o endereço e o valor no endereço a NULL
+ * 
+ * @param arr Array de inteiros
+ * 
+ */
+
 void fibArrayDestroy(int **arr){
     free(*arr);
-    *arr = NULL;
+    *arr = NULL;  
 }
