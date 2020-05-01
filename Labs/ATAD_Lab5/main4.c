@@ -1,32 +1,26 @@
 #include <stdio.h> 
 #include <stdlib.h>
-#include <string.h>
 
 int fib(int n);
 int* fibArrayCreate(int n);
 void fibArrayPrint(int *arr,int size);
-int* fibArrayCopy(int *arr, int size);
+void fibArrayDestroy(int **arr);
+void fibArrayExpand(int **ptArr, int *size);
 
 int main(){
-
     int *array;
+    int **arrayPointer = &array;
     int n;
-    int *newArray;
 
-    printf("Length of fib sequence?:");
-    scanf("%d",&n);
+    printf("Length of fib sequence?: ");
+    scanf("%d", &n);
     array = fibArrayCreate(n);
-    printf("Address of fib array: %p\n",&array);
+    printf("Address of fib array: %p\n", &array);
     fibArrayPrint(array,n);
-
-    newArray = fibArrayCopy(array,n);
-    printf("Address of fib array copy: %p\n",&newArray);
-    fibArrayPrint(newArray,n);
-
-    free(array);
-    printf("Address of fib array: %p\n",&array);
-    free(newArray);
-
+    printf("Address of fib array: %p", &array);
+    fibArrayExpand(arrayPointer, &n);
+    fibArrayPrint(array,n);
+    fibArrayDestroy(arrayPointer);
 }
 
 
@@ -73,7 +67,7 @@ int* fibArrayCreate(int n){
  */
 void fibArrayPrint(int *arr,int size){
     if(arr == NULL){
-        printf("(NULL)");
+        printf("\n(NULL)\n");
         return;
     }
     printf("{");
@@ -84,15 +78,29 @@ void fibArrayPrint(int *arr,int size){
 }
 
 /**
- * @brief Algoritmo que copia o array de inteiros com os valores de fibonnaci para outro array de inteiros
+ * @brief Algoritmo que serve para por o endereço e o valor no endereço a NULL
  * 
- * @param n n-ésimo número
+ * @param arr Endereço de um array
  * 
- * @return int array
  */
-int* fibArrayCopy(int *arr, int size){
-    int *array;
-    array = malloc(sizeof(int)*size);
-    memcpy(array,arr,sizeof(int)*size);
-    return array;
+void fibArrayDestroy(int **arr){
+    free(*arr);
+    *arr = NULL;  
+}
+
+
+/**
+ * @brief Algoritmo que recebe o endereço de um array alocado previamente e liberta a memória alocada e atribui o valor NULL
+ * 
+ * @param arr Endereço de um array
+ * @param size Tamanho do array
+ * 
+ */
+void fibArrayExpand(int **ptArr, int *size) {
+    int sizeTmp = *size;
+    *ptArr = (int *) realloc(*ptArr, 2 * sizeTmp * sizeof(int));
+    *size = sizeTmp * 2;
+    for(int i = sizeTmp - 1; i < *size; i++){
+        *(*ptArr + i) = fib(i-1) + fib(i-2);
+    }
 }

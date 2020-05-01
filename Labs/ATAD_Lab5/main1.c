@@ -7,17 +7,17 @@ void fibArrayPrint(int *arr,int size);
 
 int main(){
 
-int *array;
-int n;
+    int *array;
+    int n;
 
-
-printf("Length of fib sequence?:");
-scanf("%d",&n);
-array = fibArrayCreate(n);
-printf("Address of fib array: %p\n",&array);
-fibArrayPrint(array,n);
-free(array);
-printf("Address of fib array: %p\n",&array);
+    printf("Length of fib sequence?: ");
+    scanf("%d",&n);
+    array = fibArrayCreate(n);
+    printf("Address of fib array: %p\n",&array);
+    fibArrayPrint(array,n);
+    free(array);
+    printf("Address of fib array: %p\n",&array);
+    return EXIT_SUCCESS;
 
 }
 
@@ -28,7 +28,6 @@ printf("Address of fib array: %p\n",&array);
  * 
  * @return int 
  */
-
 int fib(int n){
     if(n == 0)
         return 0;
@@ -45,7 +44,6 @@ int fib(int n){
  * 
  * @return int array
  */
-
 int* fibArrayCreate(int n){
     int *array = NULL;
     array = (int*) calloc(n,sizeof(int));
@@ -64,7 +62,6 @@ int* fibArrayCreate(int n){
  * @param size Tamanho do array
  * 
  */
-
 void fibArrayPrint(int *arr,int size){
     if(arr == NULL){
         printf("(NULL)");

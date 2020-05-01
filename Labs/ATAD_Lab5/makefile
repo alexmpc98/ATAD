@@ -7,6 +7,12 @@ n2:
 n3:
 	gcc -o prog -g main3.c 
 
+n4:
+	gcc -o prog -g main4.c 
+
+n5:
+	gcc -o prog -g main5.c 
+
 run:
 	./prog
 

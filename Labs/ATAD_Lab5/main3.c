@@ -7,18 +7,18 @@ void fibArrayPrint(int *arr,int size);
 void fibArrayDestroy(int **arr);
 
 int main(){
+    int *array;
+    int **arrayPointer = &array;
+    int n;
 
-int *array;
-int n;
-
-printf("Length of fib sequence?:");
-scanf("%d",&n);
-array = fibArrayCreate(n);
-printf("Address of fib array: %p\n",&array);
-fibArrayPrint(array,n);
-fibArrayDestroy(array);
-fibArrayPrint(array,n);
-printf("\nAddress of fib array: %p\n",&array);
+    printf("Length of fib sequence?:");
+    scanf("%d", &n);
+    array = fibArrayCreate(n);
+    printf("Address of fib array: %p\n", &array);
+    fibArrayPrint(array,n);
+    fibArrayDestroy(arrayPointer);
+    printf("Address of fib array: %p", *arrayPointer);
+    fibArrayPrint(array,n);
 }
 
 
@@ -29,7 +29,6 @@ printf("\nAddress of fib array: %p\n",&array);
  * 
  * @return int 
  */
-
 int fib(int n){
     if(n == 0)
         return 0;
@@ -46,7 +45,6 @@ int fib(int n){
  * 
  * @return int array
  */
-
 int* fibArrayCreate(int n){
     int *array = NULL;
     array = (int*) calloc(n,sizeof(int));
@@ -65,10 +63,9 @@ int* fibArrayCreate(int n){
  * @param size Tamanho do array
  * 
  */
-
 void fibArrayPrint(int *arr,int size){
     if(arr == NULL){
-        printf("(NULL)");
+        printf("\n(NULL)\n");
         return;
     }
     printf("{");
@@ -81,10 +78,9 @@ void fibArrayPrint(int *arr,int size){
 /**
  * @brief Algoritmo que serve para por o endereço e o valor no endereço a NULL
  * 
- * @param arr Array de inteiros
+ * @param arr Endereço de um array
  * 
  */
-
 void fibArrayDestroy(int **arr){
     free(*arr);
     *arr = NULL;  
