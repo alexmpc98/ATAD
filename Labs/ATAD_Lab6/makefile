@@ -7,6 +7,9 @@ n2:
 n3:
 	gcc -o prog -g main3.c kahoot.c listElem.c listArrayList.c utils.c
 
+n4:
+	gcc -o prog -g main4.c kahoot.c listElem.c listArrayList.c utils.c
+
 run:
 	./prog
 

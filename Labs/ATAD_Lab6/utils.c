@@ -82,24 +82,128 @@ void sortByAlphabeticalOrder(PtList *listKR){
         printf("An error ocurred... Please try again...\n");
         return;
     }
-    int a = 0;
-    int b = 0;
-    int c = 0;
+    int error1 = 0;
+    int error2 = 0;
+    int error3 = 0;
+    int error4 = 0;
+    int error5 = 0;
     KahootReport kr;
     KahootReport kr2;
     KahootReport kr3;
     for(int i=0; i<ptSize-1;i++){
-        a = listGet(*listKR,i,&kr);
         for(int j=i+1;j<ptSize;j++){
-            b = listGet(*listKR,i,&kr2);
-            if(kr.nickname < kr2.nickname){
-               printf("Actually Bigger %d %d",i,j);
-                kr3 = kr;
-                kr = kr2;
-                kr2 = kr3;
-                c = listSet(*listKR,i,kr2,&kr);
+            /* Get List 1 2*/
+            error1 = listGet(*listKR,i,&kr);
+
+            if(error1 == LIST_FULL || error1 == LIST_INVALID_RANK || error1 == LIST_NO_MEMORY
+            || error1 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+            }
+
+            /* Get List 2 */
+            error2 = listGet(*listKR,j,&kr2);
+
+            if(error2 == LIST_FULL || error2 == LIST_INVALID_RANK || error2 == LIST_NO_MEMORY
+            || error2 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+            }
+            /* Compare */
+            if(strcmp(kr.nickname,kr2.nickname)>0){
+                /* Swap Operation 1*/
+                error3 = listSet(*listKR,i,kr3,&kr);
+
+                if(error3 == LIST_FULL || error3 == LIST_INVALID_RANK || error3 == LIST_NO_MEMORY
+                || error3 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+                }
+                
+                /* Swap Operation 2*/
+                error4 = listSet(*listKR,j,kr,&kr2);
+
+                if(error4 == LIST_FULL || error4 == LIST_INVALID_RANK || error4 == LIST_NO_MEMORY
+                || error4 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+                }
+                
+                /* Swap Operation 3*/
+                error5 = listSet(*listKR,i,kr2,&kr3);
+
+                if(error5 == LIST_FULL || error5 == LIST_INVALID_RANK || error5 == LIST_NO_MEMORY
+                || error5 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+                }
             }
         }
-    } 
-    listPrint(*listKR);
+    }
+}
+
+void sortByWeekAscendingOrder(PtList *listKR){
+    int ptSize = 0;  
+    int size_code = listSize(*listKR,&ptSize);
+    if(size_code == LIST_FULL || size_code == LIST_INVALID_RANK || size_code == LIST_NO_MEMORY
+    || size_code == LIST_NULL){
+        printf("An error ocurred... Please try again...\n");
+        return;
+    }
+    int error1 = 0;
+    int error2 = 0;
+    int error3 = 0;
+    int error4 = 0;
+    int error5 = 0;
+    KahootReport kr;
+    KahootReport kr2;
+    KahootReport kr3;
+    for(int i=0; i<ptSize;i++){
+        for(int j=0;j<ptSize-i-1;j++){
+            /* Get List 1 2*/
+            error1 = listGet(*listKR,j,&kr);
+            if(error1 == LIST_FULL || error1 == LIST_INVALID_RANK || error1 == LIST_NO_MEMORY
+            || error1 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+            }
+
+            /* Get List 2 */
+            error2 = listGet(*listKR,j+1,&kr2);
+
+            if(error2 == LIST_FULL || error2 == LIST_INVALID_RANK || error2 == LIST_NO_MEMORY
+            || error2 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+            }
+            /* Compare */
+            if(kr.week>kr2.week){
+                /* Swap Operation 1*/
+                error3 = listSet(*listKR,j,kr3,&kr);
+                if(error3 == LIST_FULL || error3 == LIST_INVALID_RANK || error3 == LIST_NO_MEMORY
+                || error3 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+                }
+                
+                /* Swap Operation 2*/
+                error4 = listSet(*listKR,j,kr,&kr2);
+
+                if(error4 == LIST_FULL || error4 == LIST_INVALID_RANK || error4 == LIST_NO_MEMORY
+                || error4 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+                }
+                
+                /* Swap Operation 3*/
+                error5 = listSet(*listKR,i,kr2,&kr3);
+
+                if(error5 == LIST_FULL || error5 == LIST_INVALID_RANK || error5 == LIST_NO_MEMORY
+                || error5 == LIST_NULL){
+                printf("An error ocurred... Please try again...\n");
+                return;
+                }
+            }
+        }
+    }
 }
