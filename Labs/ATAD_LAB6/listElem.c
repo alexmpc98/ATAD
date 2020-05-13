@@ -8,10 +8,8 @@
 
 #include "listElem.h"
 #include <stdio.h>
-
-struct listImpl;
-typedef struct listImpl *PtList;
+#include "kahoot.h"
 
 void listElemPrint(ListElem elem) {
-	printf("%d \n", elem);
+	KahootReportPrint(elem);
 }

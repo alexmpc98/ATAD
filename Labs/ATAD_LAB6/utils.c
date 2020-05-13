@@ -1,11 +1,11 @@
 #include "utils.h"
 #include "kahoot.h"
+#include "list.h"
 #include "listElem.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 
 
 char** split(char *string, int nFields, const char *delim){

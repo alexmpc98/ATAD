@@ -5,6 +5,6 @@
 #include "listElem.h"
 
 int main(){
-    KahootReport *kr = []; 
-    importKahootFromFile("kahootReports.csv",kr);
+    PtList kr = NULL; 
+    importKahootFromFile("kahootReports.csv",&kr);
 }
