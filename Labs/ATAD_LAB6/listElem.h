@@ -1,3 +1,4 @@
+
 /**
  * @file listElem.h
  * @brief Defines the type ListElem.
@@ -12,15 +13,10 @@
  */
 
 #pragma once
-#define LIST_OK 0
-#define LIST_NULL 1
-#define LIST_NO_MEMORY 2
-#define LIST_EMPTY 3
-#define LIST_FULL 4
-#define LIST_INVALID_RANK 5
+#include "kahoot.h"
 
 /** Type definition. Change according to the use-case. */
-typedef int ListElem;
+typedef KahootReport ListElem;
 
 /**
  * @brief Prints an element.

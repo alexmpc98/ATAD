@@ -8,5 +8,5 @@
 int main(){
     PtList kr = NULL; 
     importKahootFromFile("kahootReports.csv",&kr);
-    listPrint(kr);
+    sortByAlphabeticalOrder(&kr);
 }

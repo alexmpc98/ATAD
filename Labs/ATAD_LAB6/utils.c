@@ -1,11 +1,11 @@
 #include "utils.h"
-#include "kahoot.h"
 #include "listElem.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
+#include "kahoot.h"
+#include "list.h"
 
 
 char** split(char *string, int nFields, const char *delim){
@@ -21,7 +21,7 @@ char** split(char *string, int nFields, const char *delim){
     return tokens;
 }
 
-void importKahootFromFile(char *filename, ListElem *listKR){
+void importKahootFromFile(char *filename, PtList *listKR){
     FILE *f = NULL;
 
     f = fopen(filename,"r");
@@ -31,7 +31,6 @@ void importKahootFromFile(char *filename, ListElem *listKR){
     }
 
     char nextline[1024];
-
     int countKR = 0; // kahoot report count
     bool firstline = true;
 
@@ -47,7 +46,7 @@ void importKahootFromFile(char *filename, ListElem *listKR){
         continue;
     }
 
-    char **tokens = split(nextline,6,';');
+    char **tokens = split(nextline,6,";");
 
     // At this moment the tokens array is composed with the following "strings"
     //tokens[0] - week
@@ -57,7 +56,7 @@ void importKahootFromFile(char *filename, ListElem *listKR){
     //tokens[4] - correct_answers;
     //tokens[5] - incorrect_answers;
 
-    KahootReport kr = KahootReportCreate(atoi(tokens[0]),atoi(tokens[1]),atoi(tokens[2]),atoi(tokens[3]),
+    KahootReport kr = KahootReportCreate(atoi(tokens[0]),atoi(tokens[1]),tokens[2],atoi(tokens[3]),
     atoi(tokens[4]),atoi(tokens[5]));
 
     free(tokens);
@@ -73,5 +72,34 @@ void importKahootFromFile(char *filename, ListElem *listKR){
 }
     printf("\n\n%d kahoot reports were read!\n\n",countKR);
     fclose(f);
+}
 
+void sortByAlphabeticalOrder(PtList *listKR){
+    int ptSize = 0;  
+    int size_code = listSize(*listKR,&ptSize);
+    if(size_code == LIST_FULL || size_code == LIST_INVALID_RANK || size_code == LIST_NO_MEMORY
+    || size_code == LIST_NULL){
+        printf("An error ocurred... Please try again...\n");
+        return;
+    }
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    KahootReport kr;
+    KahootReport kr2;
+    KahootReport kr3;
+    for(int i=0; i<ptSize-1;i++){
+        a = listGet(*listKR,i,&kr);
+        for(int j=i+1;j<ptSize;j++){
+            b = listGet(*listKR,i,&kr2);
+            if(kr.nickname < kr2.nickname){
+               printf("Actually Bigger %d %d",i,j);
+                kr3 = kr;
+                kr = kr2;
+                kr2 = kr3;
+                c = listSet(*listKR,i,kr2,&kr);
+            }
+        }
+    } 
+    listPrint(*listKR);
 }
