@@ -7,7 +7,14 @@
 #include "kahoot.h"
 #include "list.h"
 
-
+/**
+ * @brief Separação do ficheiro
+ * 
+ * @param string Valor a ser implementado no token após separação por delimitador
+ * @param nFields Numero de campos
+ * @param delim O que delimita/separa os valores
+ * @return String
+ */
 char** split(char *string, int nFields, const char *delim){
     char **tokens = (char**) malloc(sizeof(char*) * nFields);
 
@@ -21,6 +28,13 @@ char** split(char *string, int nFields, const char *delim){
     return tokens;
 }
 
+
+/**
+ * @brief Importação da informação de um ficheiro para uma lista
+ * 
+ * @param filename Nome do ficheiro (com extensão)
+ * @param listKR Lista que recebe os valores lidos do ficheiro
+ */
 void importKahootFromFile(char *filename, PtList *listKR){
     FILE *f = NULL;
 
@@ -74,6 +88,11 @@ void importKahootFromFile(char *filename, PtList *listKR){
     fclose(f);
 }
 
+/**
+ * @brief Ordenação dos dados importados por ordem alfabética, com recurso a selection sort
+ * 
+ * @param listKR Lista que contem os dados importados
+ */
 void sortByAlphabeticalOrder(PtList *listKR){
     int ptSize = 0;  
     int size_code = listSize(*listKR,&ptSize);
@@ -142,6 +161,11 @@ void sortByAlphabeticalOrder(PtList *listKR){
     }
 }
 
+/**
+ * @brief Ordenação dos dados importados por ordem ascendente de semana, com recurso a bubble sort
+ * 
+ * @param listKR Lista que contem os dados importados
+ */
 void sortByWeekAscendingOrder(PtList *listKR){
     int ptSize = 0;  
     int size_code = listSize(*listKR,&ptSize);

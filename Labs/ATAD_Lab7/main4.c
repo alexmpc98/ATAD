@@ -11,12 +11,25 @@ void totalAverageScore(PtList *listKR);
 
 int main(){
     PtList kr = NULL; 
+    int week = 0;
+    int a = 0;
     importKahootFromFile("kahootReports.csv",&kr);
-    int a = getQuestions(&kr,1);
-    totalAverageScore(&kr);
+    printf("Insert week number: ");
+    scanf("%d",&week);
+    a = getQuestions(&kr,week);
+    printf("This week %d had %d questions\n",week,a);
 
+    totalAverageScore(&kr);
 }
 
+/**
+ * @brief Este algoritmo permite obter a quantidade de questões que existiram numa dada semana
+ * 
+ * @param listKR Lista que contem todos os dados previamente importados
+ * @param week Semana que o utilizador deseja consultar
+ *
+ * @return int
+ */
 int getQuestions(PtList *listKR, int week){
     int ptSize = 0;  
     int size_code = listSize(*listKR,&ptSize);
@@ -36,6 +49,12 @@ int getQuestions(PtList *listKR, int week){
     return counter;
 }
 
+/**
+ * @brief Este algoritmo permite obter a pontuação média por semana
+ * 
+ * @param listKR Lista que contem todos os dados previamente importados
+ *
+ */
 void totalAverageScore(PtList *listKR){ 
     int ptSize = 0;  
     int size_code = listSize(*listKR,&ptSize);
@@ -58,19 +77,18 @@ void totalAverageScore(PtList *listKR){
     int weeks[week];
     double average[week];
     for(int i=0; i<week; i++){ 
-        for(int j=0;j<getQuestions(listKR,i); j++){
+        for(int j=0;j<getQuestions(listKR,i+1); j++){
             sum = sum + kr.total_score;
         }
-        avg = sum/getQuestions(listKR,i); 
+        avg = sum/getQuestions(listKR,i+1); 
         weeks[i] = i;
         average[i] = avg; 
         sum = 0;
     }
-   for(int y=0;y<sizeof(weeks)/sizeof(weeks[0]);y++){
+   /*for(int y=0;y<sizeof(weeks)/sizeof(weeks[0]);y++){
         printf("%d",weeks[y]);
-    } /* 
+    }  
     for(int a=0;a<sizeof(average)/sizeof(average[0]);a++){
         printf("AVG - %2.f", average[a]);
     } */ 
 }
-
