@@ -10,6 +10,12 @@ n3:
 n4:
 	gcc -o prog -g main4.c kahoot.c listElem.c listArrayList.c utils.c
 
+n5_lal:
+	gcc -o prog -g main5.c kahoot.c listElem.c listArrayList.c utils.c
+
+n5_lkl:
+	gcc -o prog -g main5.c kahoot.c listElem.c listLinkedList.c utils.c
+
 run:
 	./prog
 

@@ -18,8 +18,9 @@ int main(){
     scanf("%d",&week);
     a = getQuestions(&kr,week);
     printf("This week %d had %d questions\n",week,a);
-
     totalAverageScore(&kr);
+    listDestroy(&kr);
+    return EXIT_SUCCESS;
 }
 
 /**
@@ -46,11 +47,11 @@ int getQuestions(PtList *listKR, int week){
              counter++;
          }
     }
-    return counter;
+    return counter-1;
 }
 
 /**
- * @brief Este algoritmo permite obter a pontuação média por semana
+ * @brief Este algoritmo imprime sobre a forma de uma matriz a pontuação média por semana
  * 
  * @param listKR Lista que contem todos os dados previamente importados
  *
@@ -63,32 +64,25 @@ void totalAverageScore(PtList *listKR){
         printf("An error ocurred... Please try again...\n");
         return;
     }
-    //int a = getQuestions(&kr,1);
     KahootReport kr;
     int week = 0;
-    for(int i=0; i<ptSize;i++){
-         listGet(*listKR,i,&kr);
-         if(kr.week > week){
-             week = kr.week;
+    for(int i = 0; i < ptSize; i++){
+         listGet(*listKR, i, &kr);
+         if(kr.week != week){
+             week++;
          }        
     }
-    int sum = 0;
-    double avg = 0;
-    int weeks[week];
-    double average[week];
-    for(int i=0; i<week; i++){ 
-        for(int j=0;j<getQuestions(listKR,i+1); j++){
+    double sum = 0.0;
+    int score_size = 0;
+    printf("\n| Week | Total_Score Average   |\n");
+    for(int i = 0; i < week; i++){ 
+        listGet(*listKR, i, &kr);
+        score_size = getQuestions(listKR,i+1);
+        for(int j = 0; j < score_size; j++){
             sum = sum + kr.total_score;
         }
-        avg = sum/getQuestions(listKR,i+1); 
-        weeks[i] = i;
-        average[i] = avg; 
-        sum = 0;
+        printf("| %d    | %0.2f               |\n", i+1, (double)sum/score_size);
+        sum = 0.0;
     }
-   /*for(int y=0;y<sizeof(weeks)/sizeof(weeks[0]);y++){
-        printf("%d",weeks[y]);
-    }  
-    for(int a=0;a<sizeof(average)/sizeof(average[0]);a++){
-        printf("AVG - %2.f", average[a]);
-    } */ 
+    printf("\n");
 }

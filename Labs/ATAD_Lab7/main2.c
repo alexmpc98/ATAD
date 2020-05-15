@@ -9,4 +9,6 @@ int main(){
     PtList kr = NULL; 
     importKahootFromFile("kahootReports.csv",&kr);
     listPrint(kr);
+    listDestroy(&kr);
+    return EXIT_SUCCESS;
 }
