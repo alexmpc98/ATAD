@@ -8,30 +8,87 @@
 #include "stack.h"
 #include "stackElem.h"
 
+bool evaluatePostfixExpression(char * expression, int *result);
 void convertInfixToPostfix(char *suffix, char ** postfix);
 
 int main(){
-   
-    /*char* expression1 = "+5*79-4";
-    char* expression2 = "*+579-4";
-    char* expression3 = "/*+5633";
-    char* expression4 = "/+37-62";*/
+    char* expression;
+    char* newExpression;
+    int result = 0;
+    char response = 'Y';
+    bool eval = false;
+    while(true){
+        printf("Insert an infix expression (single-digit only) >");
+        scanf("%s", expression);
 
-    char* newExpression1;
-   /* char* newExpression2;
-    char* newExpression3;
-    char* newExpression4;*/
+        convertInfixToPostfix(expression, &newExpression); 
 
-    convertInfixToPostfix("5 + (3 * 2)", &newExpression1);
-    printf("\n%s\n", newExpression1);
-    /*convertInfixToPostfix(expression1, &newExpression1);
-    printf("\n%s\n", newExpression1);
-    convertInfixToPostfix(expression2, &newExpression2);
-    printf("\n%s\n", newExpression2);
-    convertInfixToPostfix(expression3, &newExpression3);
-    printf("\n%s\n", newExpression3);
-    convertInfixToPostfix(expression4, &newExpression4);
-    printf("\n%s\n", newExpression4);*/
+        eval = evaluatePostfixExpression(expression, &result);
+        printf("The result is: %d\n", result);
+
+        printf("More calculations(Y/N)?\n");
+        scanf("%s", &response);
+        if (response == 'N' || response == 'n')
+            break;
+    }
+}
+
+
+/**
+ * @brief Calcula o resultado de uma expressão posfixa (ou RPN) bem formada.
+          Complexidade algoritmica: O(n)
+ * @param expression String contendo uma expressão
+ * @param result Referência de uma string contendo a expressão com o resultado
+ *
+ * @return boolean
+ */
+bool evaluatePostfixExpression(char * expression, int *result){
+    int sizeOfExpression = strlen(expression);
+    PtStack stack = stackCreate(sizeOfExpression);
+    stackClear(stack);
+    int a,b,c = 0; 
+    for(int i=0;i<sizeOfExpression;i++){
+        if(isdigit(expression[i]) > 0){
+            int value = expression[i] - '0';
+            stackPush(stack,value);
+            stackPrint(stack);
+        }
+        else if(expression[i] == '*'){
+            stackPop(stack,&a);
+            stackPop(stack,&b);
+            c = a*b;
+            stackPush(stack,c);
+            stackPrint(stack);
+        }
+        else if(expression[i] == '+'){
+            stackPop(stack,&a);
+            stackPop(stack,&b);
+            c = a+b;
+            stackPush(stack,c);
+            stackPrint(stack);
+        }
+        else if(expression[i] == '-'){
+            stackPop(stack,&a);
+            stackPop(stack,&b);
+            c = a-b;
+            stackPush(stack,c);
+            stackPrint(stack);
+        }
+        else if(expression[i] == '/'){
+            stackPop(stack,&a);
+            stackPop(stack,&b);
+            c = a/b;
+            stackPush(stack,c);
+            stackPrint(stack);
+        }
+    }
+    stackPeek(stack,result);
+    int size=0;
+    stackSize(stack,&size);
+    if(size>1 || stackIsEmpty(stack))
+        return false; 
+    stackDestroy(&stack);
+    return true;
 }
 
 

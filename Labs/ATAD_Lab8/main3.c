@@ -22,6 +22,15 @@ int main(){
         printf("The expression is not in postfix form!\n");
 }
 
+
+/**
+ * @brief Calcula o resultado de uma expressão posfixa (ou RPN) bem formada.
+ *        Complexidade algoritmica: O(n)
+ * @param expression String contendo uma expressão
+ * @param result Referência de uma string contendo a expressão com o resultado
+ *
+ * @return boolean
+ */
 bool evaluatePostfixExpression(char * expression, int *result){
     int sizeOfExpression = strlen(expression);
     PtStack stack = stackCreate(sizeOfExpression);
